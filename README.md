@@ -1,6 +1,6 @@
 # Learning Golang
 
-Run:
+Run by Docker:
 ```sh
 docker build -t learning . && docker run learning:latest
 ```
