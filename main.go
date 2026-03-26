@@ -6,10 +6,13 @@ import (
 )
 
 type User struct {
+	ID        int    `json:"id"`
 	Name      string `json:"name"`
 	Email     string `json:"email"`
-	Admin     bool   `json:"admin"`
+	Password  string `json:"-"`
+	Role      string `json:"role,omitempty"`
 	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
 }
 
 func (u User) getEmail() (string, error) {
@@ -25,10 +28,13 @@ func (u *User) setEmail(newEmail string) {
 
 func main() {
 	user := User{
+		ID:        1,
 		Name:      "Helder Martins",
 		Email:     "heldi@gmail.com",
-		Admin:     true,
+		Role:      "superuser",
+		Password:  "senha123",
 		CreatedAt: "YYYY-MM-DDT00:00:00.000z",
+		UpdatedAt: "YYYY-MM-DDT00:00:00.000z",
 	}
 
 	email, err := user.getEmail()

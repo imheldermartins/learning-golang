@@ -58,6 +58,42 @@ func (u *User) setEmail(newEmail string) {
 - Validar valores antes de usar
 - Padrão: `if err != nil { return }`
 
+### 7. Serialização JSON
+- **Tags JSON**: Mapeiam campos da struct para nomes JSON
+  - `json:"fieldname"` - Serializa o campo com o nome especificado
+  - `json:"-"` - Omite o campo completamente do JSON (nunca aparece)
+  - `json:"fieldname,omitempty"` - Omite o campo se estiver vazio
+- **Serialização**: `json.Marshal()` converte struct para bytes JSON
+- **Desserialização**: `json.Unmarshal()` converte JSON para struct
+- Exemplo:
+```go
+type User struct {
+    ID        int    `json:"id"`
+    Name      string `json:"name"`
+    Email     string `json:"email"`
+    Password  string `json:"-"`                // Nunca aparece no JSON
+    Role      string `json:"role,omitempty"`   // Omitido se vazio
+    CreatedAt string `json:"createdAt"`
+    UpdatedAt string `json:"updatedAt"`
+}
+
+user := User{
+    ID:        1,
+    Name:      "Helder Martins",
+    Email:     "heldi@gmail.com",
+    Role:      "superuser",
+    Password:  "senha123",                     // Será ignorado
+    CreatedAt: "YYYY-MM-DDT00:00:00.000z",
+    UpdatedAt: "YYYY-MM-DDT00:00:00.000z",
+}
+
+// Serializar para JSON
+data, _ := json.Marshal(user)
+fmt.Println(string(data))
+// Output: {"id":1,"name":"Helder Martins","email":"heldi@gmail.com","role":"superuser","createdAt":"YYYY-MM-DDT00:00:00.000z","updatedAt":"YYYY-MM-DDT00:00:00.000z"}
+// Note: Password não aparece (json:"-") e Role aparece (não está vazio)
+```
+
 ## Executar com Docker
 
 ```sh
