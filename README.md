@@ -1,6 +1,22 @@
 # Aprendendo Golang
 
-## Tópicos Cobertos
+## Inicializa o pacote do Go:
+```bash
+go mod init com.packagename/owner
+```
+
+## Instala bibliotecas necessárias:
+
+```bash
+go get -u <package_name>
+```
+
+### Example:
+```bash
+go get -u github.com/gorilla/mux modernc.org/sqlite github.com/joho/godotenv
+```
+
+## Linguagem Golang
 
 ### 1. Formatação de Strings
 - **Genéricos**: `%v` (valor), `%+v` (com campos), `%#v` (sintaxe Go), `%T` (tipo)
