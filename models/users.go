@@ -1,4 +1,4 @@
-package api
+package models
 
 import (
 	"database/sql"
@@ -9,6 +9,12 @@ import (
 	"github.com/joho/godotenv"
 	_ "modernc.org/sqlite"
 )
+
+type User struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
 
 var DB *sql.DB
 
@@ -38,12 +44,6 @@ func setupDB() *sql.DB {
 
 	log.Println("Database connected successfully!")
 	return db
-}
-
-type User struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
 }
 
 func GetUsers() []User {
